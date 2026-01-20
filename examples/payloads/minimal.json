@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "schema_version": "1.0",
+    "generated_at": "2026-01-18T14:30:00Z",
+    "build_id": "20260118-1430-minimal"
+  },
+  "alert": null,
+  "lanes": {
+    "signal": [],
+    "wire": [],
+    "flash": []
+  },
+  "ticker": {
+    "tech": [],
+    "crypto": [],
+    "markets": []
+  }
+}

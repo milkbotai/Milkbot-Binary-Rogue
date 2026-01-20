@@ -1,0 +1,56 @@
+{
+  "source": "TechNews RSS Feed",
+  "ingested_at": "2026-01-18T14:15:23Z",
+  "adapter": "rss_adapter_v1",
+  "raw_signals": [
+    {
+      "id": "rss-item-12345",
+      "title": "Major breakthrough in quantum computing announced",
+      "link": "https://example.com/quantum-breakthrough",
+      "pub_date": "2026-01-18T14:15:00Z",
+      "description": "Researchers at leading tech company announce significant advancement...",
+      "author": "Jane Smith",
+      "categories": ["technology", "computing", "research"],
+      "metadata": {
+        "word_count": 450,
+        "read_time": "2 min",
+        "source_reliability": "high"
+      }
+    },
+    {
+      "id": "rss-item-12346",
+      "title": "Privacy concerns raised over new data collection practices",
+      "link": "https://example.com/privacy-concerns",
+      "pub_date": "2026-01-18T11:20:00Z",
+      "description": "Digital rights advocates express concerns about...",
+      "author": "John Doe",
+      "categories": ["privacy", "policy", "technology"],
+      "metadata": {
+        "word_count": 380,
+        "read_time": "2 min",
+        "source_reliability": "medium"
+      }
+    },
+    {
+      "id": "rss-item-12347",
+      "title": "New semiconductor plant breaks ground in Arizona",
+      "link": "https://example.com/semiconductor-plant",
+      "pub_date": "2026-01-18T12:30:00Z",
+      "description": "Construction begins on $12 billion manufacturing facility...",
+      "author": "Sarah Johnson",
+      "categories": ["business", "manufacturing", "semiconductors"],
+      "metadata": {
+        "word_count": 520,
+        "read_time": "3 min",
+        "source_reliability": "high"
+      }
+    }
+  ],
+  "adapter_metadata": {
+    "fetch_duration_ms": 234,
+    "items_fetched": 3,
+    "feed_url": "https://example.com/rss/tech",
+    "etag": "33a64df551425fcc55e4d42a148795d9f25f89d4",
+    "last_modified": "2026-01-18T14:15:00Z"
+  }
+}

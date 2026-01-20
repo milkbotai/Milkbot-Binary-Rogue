@@ -1,0 +1,59 @@
+{
+  "ok": true,
+  "missing_files": [],
+  "forbidden_hits": [],
+  "required_checks": {
+    "frontend_bg": {
+      "ok": true,
+      "needle": "#0a0a0a",
+      "file": "docs/FRONTEND.md"
+    },
+    "ops_ip": {
+      "ok": true,
+      "needle": "86\\.48\\.24\\.74",
+      "file": "docs/OPERATIONS.md"
+    },
+    "lanes_and_ticker": {
+      "ok": true,
+      "needle": "lanes\\.signal\\|wire\\|flash",
+      "file": "docs/OUTPUTS.md"
+    },
+    "ticker_buckets": {
+      "ok": true,
+      "needle": "ticker\\.tech\\|crypto\\|markets",
+      "file": "docs/OUTPUTS.md"
+    }
+  },
+  "schema": {
+    "ok": true,
+    "required": [
+      "meta",
+      "lanes",
+      "ticker"
+    ],
+    "lanes_required": [
+      "signal",
+      "wire",
+      "flash"
+    ],
+    "ticker_required": [
+      "tech",
+      "crypto",
+      "markets"
+    ]
+  },
+  "internal_links": {
+    "ok": true,
+    "broken_count": 0,
+    "broken_links": []
+  },
+  "json_examples": {
+    "ok": true,
+    "error_count": 0,
+    "errors": []
+  },
+  "example_payloads": {
+    "ok": null,
+    "note": "jsonschema not installed, skipping payload validation"
+  }
+}

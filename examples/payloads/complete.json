@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "schema_version": "1.0",
+    "generated_at": "2026-01-18T14:30:00Z",
+    "build_id": "20260118-1430-a3f7b2c1"
+  },
+  "alert": {
+    "headline": "Major breakthrough in quantum computing announced",
+    "url": "https://example.com/quantum-breakthrough",
+    "source": "TechNews",
+    "published": "2026-01-18T14:15:00Z",
+    "sentiment": 2,
+    "cluster_size": 7
+  },
+  "lanes": {
+    "signal": [
+      {
+        "headline": "AI model achieves 99% accuracy in medical diagnosis",
+        "url": "https://example.com/ai-diagnosis",
+        "source": "MedTech Today",
+        "published": "2026-01-18T13:45:00Z",
+        "sentiment": 1,
+        "weight": 95,
+        "cluster_size": 4
+      },
+      {
+        "headline": "New semiconductor plant breaks ground in Arizona",
+        "url": "https://example.com/semiconductor-plant",
+        "source": "Industry Report",
+        "published": "2026-01-18T12:30:00Z",
+        "sentiment": 1,
+        "weight": 87,
+        "cluster_size": 3
+      },
+      {
+        "headline": "Privacy concerns raised over new data collection practices",
+        "url": "https://example.com/privacy-concerns",
+        "source": "Digital Rights Monitor",
+        "published": "2026-01-18T11:20:00Z",
+        "sentiment": -1,
+        "weight": 82,
+        "cluster_size": 5
+      }
+    ],
+    "wire": [
+      {
+        "headline": "Tech giant announces workforce restructuring",
+        "url": "https://example.com/restructuring",
+        "source": "Business Wire",
+        "published": "2026-01-18T10:00:00Z",
+        "sentiment": -1,
+        "weight": 78,
+        "cluster_size": 6
+      },
+      {
+        "headline": "Open source project reaches 100k stars on GitHub",
+        "url": "https://example.com/oss-milestone",
+        "source": "Dev Community",
+        "published": "2026-01-18T09:15:00Z",
+        "sentiment": 1,
+        "weight": 71,
+        "cluster_size": 2
+      }
+    ],
+    "flash": [
+      {
+        "headline": "Server outage affects major cloud provider",
+        "url": "https://example.com/outage",
+        "source": "Status Monitor",
+        "published": "2026-01-18T14:10:00Z",
+        "sentiment": -2,
+        "weight": 65,
+        "cluster_size": 8
+      },
+      {
+        "headline": "Emergency security patch released for popular framework",
+        "url": "https://example.com/security-patch",
+        "source": "Security Bulletin",
+        "published": "2026-01-18T13:55:00Z",
+        "sentiment": 0,
+        "weight": 60,
+        "cluster_size": 3
+      }
+    ]
+  },
+  "ticker": {
+    "tech": [
+      {
+        "label": "NASDAQ",
+        "value": "+0.87%",
+        "url": "https://example.com/nasdaq"
+      },
+      {
+        "label": "Tech IPOs",
+        "value": "3 this week"
+      },
+      {
+        "label": "VC Funding",
+        "value": "$2.1B"
+      }
+    ],
+    "crypto": [
+      {
+        "label": "BTC",
+        "value": "$47,234",
+        "url": "https://example.com/btc"
+      },
+      {
+        "label": "ETH",
+        "value": "$2,891",
+        "url": "https://example.com/eth"
+      },
+      {
+        "label": "Market Cap",
+        "value": "$1.8T"
+      }
+    ],
+    "markets": [
+      {
+        "label": "S&P 500",
+        "value": "+0.34%",
+        "url": "https://example.com/sp500"
+      },
+      {
+        "label": "Oil",
+        "value": "$78.45/bbl"
+      },
+      {
+        "label": "Gold",
+        "value": "$2,034/oz"
+      }
+    ]
+  }
+}

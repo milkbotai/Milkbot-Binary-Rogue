@@ -1,0 +1,342 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://binary-rogue.example.com/schemas/headlines.v1.schema.json",
+  "title": "Binary-Rogue Headlines Payload",
+  "description": "Static artifact produced by Binary-Rogue deterministic build system",
+  "type": "object",
+  "required": [
+    "meta",
+    "lanes",
+    "ticker"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "description": "Build metadata for audit and tracking",
+      "required": [
+        "schema_version",
+        "generated_at",
+        "build_id"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "description": "Schema version (semver)",
+          "pattern": "^\\d+\\.\\d+(\\.\\d+)?$",
+          "examples": ["1.0", "1.0.0"]
+        },
+        "generated_at": {
+          "type": "string",
+          "description": "Build timestamp in ISO 8601 format",
+          "format": "date-time",
+          "examples": ["2026-01-18T14:30:00Z"]
+        },
+        "build_id": {
+          "type": "string",
+          "description": "Unique build identifier",
+          "minLength": 1,
+          "maxLength": 100,
+          "examples": ["20260118-1430-a3f7b2c1"]
+        },
+        "sources_observed": {
+          "type": "integer",
+          "description": "Number of sources queried",
+          "minimum": 0
+        },
+        "signals_ingested": {
+          "type": "integer",
+          "description": "Number of signals processed",
+          "minimum": 0
+        },
+        "stories_created": {
+          "type": "integer",
+          "description": "Number of story candidates",
+          "minimum": 0
+        },
+        "evaluators_used": {
+          "type": "array",
+          "description": "List of evaluators that ran",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "build_duration_ms": {
+          "type": "integer",
+          "description": "Total build duration in milliseconds",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": true
+    },
+    "alert": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Top breaking story (null if none qualifies)",
+      "required": [
+        "headline",
+        "url",
+        "source",
+        "published",
+        "sentiment"
+      ],
+      "properties": {
+        "headline": {
+          "type": "string",
+          "description": "Story headline",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "description": "Story URL",
+          "format": "uri",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "source": {
+          "type": "string",
+          "description": "Source publication name",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "published": {
+          "type": "string",
+          "description": "Publication timestamp",
+          "format": "date-time"
+        },
+        "sentiment": {
+          "type": "integer",
+          "description": "Sentiment score: -2 (very negative) to +2 (very positive)",
+          "minimum": -2,
+          "maximum": 2
+        },
+        "cluster_size": {
+          "type": "integer",
+          "description": "Number of signals in this story cluster",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "lanes": {
+      "type": "object",
+      "description": "Three headline lanes with ranked stories",
+      "required": [
+        "signal",
+        "wire",
+        "flash"
+      ],
+      "properties": {
+        "signal": {
+          "type": "array",
+          "description": "Top weighted stories (signal lane)",
+          "items": {
+            "$ref": "#/definitions/lane_item"
+          },
+          "maxItems": 10
+        },
+        "wire": {
+          "type": "array",
+          "description": "Secondary stories (wire lane)",
+          "items": {
+            "$ref": "#/definitions/lane_item"
+          },
+          "maxItems": 10
+        },
+        "flash": {
+          "type": "array",
+          "description": "Breaking/urgent stories (flash lane)",
+          "items": {
+            "$ref": "#/definitions/lane_item"
+          },
+          "maxItems": 10
+        }
+      },
+      "additionalProperties": false
+    },
+    "ticker": {
+      "type": "object",
+      "description": "Market data ticker buckets",
+      "required": [
+        "tech",
+        "crypto",
+        "markets"
+      ],
+      "properties": {
+        "tech": {
+          "type": "array",
+          "description": "Technology sector indicators",
+          "items": {
+            "$ref": "#/definitions/ticker_item"
+          },
+          "maxItems": 20
+        },
+        "crypto": {
+          "type": "array",
+          "description": "Cryptocurrency indicators",
+          "items": {
+            "$ref": "#/definitions/ticker_item"
+          },
+          "maxItems": 20
+        },
+        "markets": {
+          "type": "array",
+          "description": "General market indicators",
+          "items": {
+            "$ref": "#/definitions/ticker_item"
+          },
+          "maxItems": 20
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "definitions": {
+    "lane_item": {
+      "type": "object",
+      "description": "A story in a headline lane",
+      "required": [
+        "headline",
+        "url",
+        "source",
+        "published",
+        "sentiment",
+        "weight"
+      ],
+      "properties": {
+        "headline": {
+          "type": "string",
+          "description": "Story headline",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "description": "Story URL",
+          "format": "uri",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "source": {
+          "type": "string",
+          "description": "Source publication name",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "published": {
+          "type": "string",
+          "description": "Publication timestamp",
+          "format": "date-time"
+        },
+        "sentiment": {
+          "type": "integer",
+          "description": "Sentiment score: -2 (very negative) to +2 (very positive)",
+          "minimum": -2,
+          "maximum": 2
+        },
+        "weight": {
+          "type": "integer",
+          "description": "Story weight/priority (higher = more important)",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "cluster_size": {
+          "type": "integer",
+          "description": "Number of signals in this story cluster",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "ticker_item": {
+      "type": "object",
+      "description": "A ticker item showing a metric or indicator",
+      "required": [
+        "label",
+        "value"
+      ],
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "Ticker label (e.g., 'NASDAQ', 'BTC')",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "value": {
+          "type": "string",
+          "description": "Ticker value (formatted for display)",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "url": {
+          "type": "string",
+          "description": "Optional URL for more details",
+          "format": "uri",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "meta": {
+        "schema_version": "1.0",
+        "generated_at": "2026-01-18T14:30:00Z",
+        "build_id": "20260118-1430-a3f7b2c1",
+        "sources_observed": 12,
+        "signals_ingested": 427,
+        "stories_created": 156
+      },
+      "alert": {
+        "headline": "Major breakthrough in quantum computing announced",
+        "url": "https://example.com/quantum-breakthrough",
+        "source": "TechNews",
+        "published": "2026-01-18T14:15:00Z",
+        "sentiment": 2,
+        "cluster_size": 7
+      },
+      "lanes": {
+        "signal": [
+          {
+            "headline": "AI model achieves 99% accuracy in medical diagnosis",
+            "url": "https://example.com/ai-diagnosis",
+            "source": "MedTech Today",
+            "published": "2026-01-18T13:45:00Z",
+            "sentiment": 1,
+            "weight": 95,
+            "cluster_size": 4
+          }
+        ],
+        "wire": [],
+        "flash": []
+      },
+      "ticker": {
+        "tech": [
+          {
+            "label": "NASDAQ",
+            "value": "+0.87%",
+            "url": "https://example.com/nasdaq"
+          }
+        ],
+        "crypto": [
+          {
+            "label": "BTC",
+            "value": "$47,234"
+          }
+        ],
+        "markets": [
+          {
+            "label": "S&P 500",
+            "value": "+0.34%"
+          }
+        ]
+      }
+    }
+  ]
+}

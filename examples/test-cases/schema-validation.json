@@ -1,0 +1,88 @@
+{
+  "test_name": "schema_compliance",
+  "description": "Verify all output artifacts validate against the schema",
+  "test_type": "validation",
+  "schema_version": "1.0",
+  "test_cases": [
+    {
+      "case_name": "valid_complete_payload",
+      "description": "Complete payload with all fields populated",
+      "input_file": "examples/payloads/complete.json",
+      "expected_result": "valid",
+      "assertions": [
+        "Validates against headlines.schema.json",
+        "All required fields present",
+        "All field types correct",
+        "Sentiment values in range [-2, 2]",
+        "Weight values >= 0",
+        "Timestamps in ISO 8601 format"
+      ]
+    },
+    {
+      "case_name": "valid_minimal_payload",
+      "description": "Minimal valid payload with empty arrays",
+      "input_file": "examples/payloads/minimal.json",
+      "expected_result": "valid",
+      "assertions": [
+        "Validates with empty lanes",
+        "Validates with empty ticker buckets",
+        "Validates with null alert"
+      ]
+    },
+    {
+      "case_name": "invalid_missing_meta",
+      "description": "Payload missing required meta field",
+      "payload": {
+        "lanes": {"signal": [], "wire": [], "flash": []},
+        "ticker": {"tech": [], "crypto": [], "markets": []}
+      },
+      "expected_result": "invalid",
+      "expected_error": "Required field 'meta' is missing"
+    },
+    {
+      "case_name": "invalid_sentiment_out_of_range",
+      "description": "Sentiment value outside [-2, 2] range",
+      "payload": {
+        "meta": {
+          "schema_version": "1.0",
+          "generated_at": "2026-01-18T14:00:00Z",
+          "build_id": "test"
+        },
+        "lanes": {
+          "signal": [{
+            "headline": "Test",
+            "url": "https://example.com",
+            "source": "Test",
+            "published": "2026-01-18T14:00:00Z",
+            "sentiment": 5,
+            "weight": 100
+          }],
+          "wire": [],
+          "flash": []
+        },
+        "ticker": {"tech": [], "crypto": [], "markets": []}
+      },
+      "expected_result": "invalid",
+      "expected_error": "Sentiment value must be in range [-2, 2]"
+    },
+    {
+      "case_name": "invalid_missing_lane",
+      "description": "Lanes object missing required 'flash' field",
+      "payload": {
+        "meta": {
+          "schema_version": "1.0",
+          "generated_at": "2026-01-18T14:00:00Z",
+          "build_id": "test"
+        },
+        "lanes": {
+          "signal": [],
+          "wire": []
+        },
+        "ticker": {"tech": [], "crypto": [], "markets": []}
+      },
+      "expected_result": "invalid",
+      "expected_error": "Required field 'flash' missing from lanes"
+    }
+  ],
+  "validation_command": "jsonschema -i <payload_file> schemas/headlines.schema.json"
+}

@@ -1,0 +1,57 @@
+{
+  "test_name": "determinism_verification",
+  "description": "Verify that identical inputs produce identical outputs",
+  "test_type": "determinism",
+  "input": {
+    "signals": [
+      {
+        "id": "sig-001",
+        "headline": "Test headline A",
+        "url": "https://example.com/a",
+        "source": "Source A",
+        "published": "2026-01-18T12:00:00Z",
+        "raw_text": "Content of signal A..."
+      },
+      {
+        "id": "sig-002",
+        "headline": "Test headline B",
+        "url": "https://example.com/b",
+        "source": "Source B",
+        "published": "2026-01-18T11:30:00Z",
+        "raw_text": "Content of signal B..."
+      }
+    ],
+    "build_config": {
+      "build_id": "test-determinism-001",
+      "timestamp": "2026-01-18T14:00:00Z"
+    }
+  },
+  "expected_behavior": {
+    "description": "Running the build twice with identical inputs must produce identical outputs",
+    "assertions": [
+      "Output artifacts are byte-for-byte identical",
+      "Same stories selected for each lane",
+      "Same sentiment scores assigned",
+      "Same weight calculations",
+      "Same story ordering",
+      "Same ticker values"
+    ]
+  },
+  "test_procedure": {
+    "steps": [
+      "Execute build with input signals",
+      "Capture output artifact (run 1)",
+      "Execute build again with same input signals",
+      "Capture output artifact (run 2)",
+      "Compare artifacts byte-for-byte",
+      "Verify all fields are identical"
+    ],
+    "success_criteria": "Artifacts are identical (excluding meta.generated_at if using system time)"
+  },
+  "notes": [
+    "The only acceptable difference is meta.generated_at if using system timestamps",
+    "All evaluator decisions must be deterministic",
+    "Random number generators must use fixed seeds if used",
+    "External API calls must be mocked or cached for deterministic testing"
+  ]
+}
